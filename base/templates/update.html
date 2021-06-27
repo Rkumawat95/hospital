@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="container">
+<div class="row mt-4">
+    <div class="col">
+        <h4 alert alert-info>Update Patient Information</h4>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Update" class="btn btn-success">
+            <a href="{% url 'list' %}" class="btn btn-info">Back to PatientList</a>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock main %}

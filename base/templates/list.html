@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block main %}
+<h4 class="text-center alert alert-warning">Show Patient Information</h4>
+<div class="container table-responsive-sm border border-success">
+        {% if stu %}  
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">FirstName</th>
+                <th scope="col">LastName</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Disease</th>
+                <th scope="col">Doctor</th>
+                <th scope="col">Doctor Fees</th>
+                <th scope="col">Admit Date</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for st in stu %}    
+              <tr>
+                <th scope="row">{{st.id}}</th>
+                <td>{{st.firstname}}</td>
+                <td>{{st.lastname}}</td>
+                <td>{{st.gender}}</td>
+                <td>{{st.Disease}}</td>
+                <td>{{st.doctor}}</td>
+                <td>{{st.doctor_fees}}</td>
+                <td>{{st.admit_date}}</td>
+                <td>
+                    <a href="{% url 'update' st.id %}" class="btn btn-warning btn-sm">Update</a>
+                    <form action="{% url 'delete' st.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                    </form>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+        {% else %}
+        <h4 class="text-center alert-info">No Record</h4>
+        {% endif %}
+</div>
+{% endblock main %}
